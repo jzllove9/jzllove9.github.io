@@ -6,7 +6,6 @@ import vue from '@astrojs/vue'
 
 export default defineConfig({
   site: 'https://jzllove9.github.io',
-  outDir: 'docs',
   server: {
     port: 1977,
   },

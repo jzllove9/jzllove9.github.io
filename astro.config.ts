@@ -5,7 +5,8 @@ import UnoCSS from 'unocss/astro'
 import vue from '@astrojs/vue'
 
 export default defineConfig({
-  site: 'https://astro-theme-vitesse.netlify.app/',
+  site: 'https://jzllove9.github.io',
+  base: 'dist',
   server: {
     port: 1977,
   },

@@ -8,4 +8,8 @@ export default antfu({
     astro: true,
     css: true,
   },
+}, {
+  rules: {
+    'astro/missing-client-only-directive-value': 'off',
+  },
 })

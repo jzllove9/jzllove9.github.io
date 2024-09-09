@@ -1,99 +1,54 @@
 export const siteConfig = {
-  author: 'Kevin Wong',
-  title: 'Vitesse theme for Astro',
-  subtitle: 'Vitesse theme for Astro, supports Vue and UnoCSS.',
-  description: 'A Minimal, SEO-friendly portfolio and blog theme for Astro.',
+  author: 'jzllove9',
+  title: '灵歌的博客',
+  subtitle: '欢迎',
+  description: '我的个人博客，分享一些技术、生活、感悟。',
   image: {
-    src: '/hero.jpg',
-    alt: 'Website Main Image',
+    src: '/inspire1.png',
+    alt: 'logo image',
   },
-  email: 'kevinwong865@gmail.com',
+  email: 'jzllove9@163.com',
   socialLinks: [
     {
       text: 'GitHub',
-      href: '',
+      href: 'https://github.com/jzllove9/',
       icon: 'i-simple-icons-github',
       header: 'i-ri-github-line',
-    },
-    {
-      text: 'Twitter',
-      href: '',
-      icon: 'i-simple-icons-x',
-      header: 'i-ri-twitter-x-line',
-    },
-    {
-      text: 'Linkedin',
-      href: '',
-      icon: 'i-simple-icons-linkedin',
-    },
-    {
-      text: 'Instagram',
-      href: '',
-      icon: 'i-simple-icons-instagram',
-    },
-    {
-      text: 'Youtube',
-      href: '',
-      icon: 'i-simple-icons-youtube',
     },
   ],
   header: {
     logo: {
-      src: '/favicon.svg',
+      src: '/inspire1.png',
       alt: 'Logo Image',
     },
     navLinks: [
       {
-        text: 'Blog',
+        text: '灵歌的博客',
         href: '/blog',
       },
-      {
-        text: 'Notes',
-        href: '/blog/notes',
-      },
-      {
-        text: 'Talks',
-        href: '/blog/talks',
-      },
-      {
-        text: 'Projects',
-        href: '/projects',
-      },
+      // {
+      //   text: 'Talks',
+      //   href: '/blog/talks',
+      // },
     ],
   },
   page: {
     blogLinks: [
       {
-        text: 'Blog',
+        text: '博客列表',
         href: '/blog',
       },
       {
-        text: 'Notes',
-        href: '/blog/notes',
-      },
-      {
-        text: 'Talks',
-        href: '/blog/talks',
+        text: '前端',
+        href: '/blog/fe',
       },
     ],
   },
   footer: {
     navLinks: [
       {
-        text: 'Posts Props',
-        href: '/posts-props',
-      },
-      {
-        text: 'Markdown Style',
-        href: '/md-style',
-      },
-      {
-        text: 'View on Astro',
-        href: 'https://astro.build/themes/details/vitesse-theme-for-astro/',
-      },
-      {
         text: 'GitHub Repository',
-        href: 'https://github.com/kevinwong865/astro-theme-vitesse',
+        href: 'https://github.com/jzllove9/jzllove9.github.io',
       },
     ],
   },

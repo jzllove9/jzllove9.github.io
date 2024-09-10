@@ -1,6 +1,6 @@
 ---
 title: 使用Pixi.js实现《围追堵截》桌游（三）
-description: 本文将介绍《围追堵截》桌游的游戏规则，以及如何使用 Pixi.js 实现游戏的绘制。
+description: 本文将介绍《围追堵截》桌游的游戏规则，以及如何使用 Pixi.js 实现游戏的绘制，第三部分。
 date: 2024-09-10
 ---
 
@@ -26,12 +26,12 @@ game.init();
 
 这样我们就实现了从 game 到 UI 的通信
 
-![i3](https://github.com/jzllove9/Blog-jzl/assets/13548092/72e8b567-8b25-4252-afa7-861bb294b74f)
+![i3](https://cdn.z.wiki/autoupload/20240910/2wRW/1518X346/i3.png)
 
 **从 UI 到 Game**
 本项目直接在 UI 中调用了 Game 实例的方法，如果不希望两个模块耦合程度过高依旧可以采用发布 - 订阅的方式来实现。
 
-![i4](https://github.com/jzllove9/Blog-jzl/assets/13548092/67aa180e-db24-40d6-b68e-aa476ee538ef)
+![i4](https://cdn.z.wiki/autoupload/20240910/5thy/1438X318/i4.png)
 
 ---
 
@@ -39,7 +39,7 @@ game.init();
 **初始化游戏对象交互**
 《围追堵截》这款桌游的操作只有两种：移动棋子和放置挡板。而在我们的游戏中，棋子移动的本质其实是点击棋盘上的 Rect 对象来告知棋子往哪里走。而挡板放置的本质是点击有方向的 Gap 对象（还记得我们有横向，纵向，无方向三种类型的 Gap 么）来告知 Block 类如何绘制挡板。
 
-![interactive1](https://github.com/jzllove9/Blog-jzl/assets/13548092/77692033-c9fc-4bef-a5f4-fd1de387753a)
+![interactive1](https://cdn.z.wiki/autoupload/20240910/Ed2p/1592X468/interactive1.png)
 
 下面给 Board 上所有的 Rect 和有方向的 Gap 添加交互事件：
 
@@ -190,7 +190,7 @@ async updatePlayerInfo() {
 
 1. 如果玩家剩余挡板不足则需要在 UI 上给予用户提示，这也是为什么代码实现中 game 实例要对外抛出一个事件 `block-remain-lack`  ：
 
-![interactive2](https://github.com/jzllove9/Blog-jzl/assets/13548092/f647ce84-874d-4436-871c-7b79bb195871)
+![interactive2](https://cdn.z.wiki/autoupload/20240910/6d6C/1454X954/interactive2.png)
 
 3. 由于只有阻挡墙的放置才可能会导致双方没有路径可以到达终点，所以只在 Gap 的交互中判断违规即可。
 4. 我们在需要移动的时候同时调用了 player 的 move 方法来进行移动。

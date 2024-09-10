@@ -1,6 +1,6 @@
 ---
 title: 使用Pixi.js实现《围追堵截》桌游（二）
-description: 本文将介绍《围追堵截》桌游的游戏规则，以及如何使用 Pixi.js 实现游戏的绘制。
+description: 本文将介绍《围追堵截》桌游的游戏规则，以及如何使用 Pixi.js 实现游戏的绘制，第二部分。
 date: 2024-09-10
 ---
 
@@ -17,7 +17,7 @@ date: 2024-09-10
 > 思考一个问题：在我们的游戏内，棋盘除了绘制格子和缝隙之外，还承载着哪些信息？
 
 **首先**，棋盘上存在元素坐标信息，注意这里的坐标并不是元素的`实际坐标`，而是元素的`索引坐标`：
-![grid1](https://github.com/jzllove9/Blog-jzl/assets/13548092/0f2de0ab-2a68-4ee2-af00-539ae6c303ea)
+![grid1](https://cdn.z.wiki/autoupload/20240910/s7PY/1806X574/grid1.png)
 
 如上图所示，当在棋盘上指出一个索引坐标时可以获取该索引位置的实际元素。也就是说可以将棋盘看做一个二维数组，并用数组中不同大小的数值表示棋盘中的不同类型的元素，在本游戏中使用的数值与对象的对应关系如下：
 
@@ -28,7 +28,7 @@ date: 2024-09-10
 ```
 
 最终如图所示，一个 3*3 的棋盘会被抽象成如下的样子：
-![grid1](https://github.com/jzllove9/Blog-jzl/assets/13548092/85b3fc24-c93e-454f-8e3d-8df1a024013e)
+![grid1](https://cdn.z.wiki/autoupload/20240910/s7PY/1806X574/grid1.png)
 
 > 注意，一个 3 * 3 的棋盘，最终在实际绘制的时候是一个 5 * 5 的二维矩阵，原因请参考上一篇文章。
 
@@ -104,20 +104,20 @@ decreaseRemain() {
 **己方棋子可移动位置**: 根据游戏规则，己方棋子每回合移动步数为 1 格，而可移动的位置同时会受到棋盘边缘，挡板位置，对方棋子三个因素的影响，下面来逐步实现：
 
 第一步，需要知道棋子周围所有格子和缝隙的信息，如下图所示：
-![player1](https://github.com/jzllove9/Blog-jzl/assets/13548092/1b7a5691-d173-4155-8bdf-95bb468c38c6)
+![player1](https://cdn.z.wiki/autoupload/20240910/FR2f/1720X542/player1.png)
 
 需要注意的是一些边界值情况，例如当棋子处于棋盘边缘的时候只能获取到两个方向的信息
 
 第二步，根据上面收集到的格子和缝隙信息，根据缝隙里面是否已经存在阻挡墙，以确定对应的格子是否可以到达：
-![player2](https://github.com/jzllove9/Blog-jzl/assets/13548092/68e88358-786d-44a6-a06c-c75f670cc1fd)
+![player2](https://cdn.z.wiki/autoupload/20240910/sbKR/1412X534/player2.png)
 
 第三步，需要从当前棋子所有可行进的格子中判断是否和对方棋子所在格子存在交叉的情况，如果不存在，那么目前的结果就是我们的所有可行进方向了。而如果有交叉的情况，根据游戏规则可知，若对方棋子处于我们的行进路线上，则可以借助对方棋子进行 "跳跃"，所以当发生交叉的情况我们还需要进一步进行处理。
 
 第四步，先获取对方棋子所在位置周围所有的可行进格子，这一步除了需要排除掉己方玩家所在位置这一步操作外和获取己方棋子可行进格子时一模一样：
-![player3](https://github.com/jzllove9/Blog-jzl/assets/13548092/2cc120d7-88b4-4595-920a-b09c9198d7ee)
+![player3](https://cdn.z.wiki/autoupload/20240910/FuM8/1438X526/player3.png)
 
 第五步，根据游戏规则可知，借助对方棋子进行 "跳跃" 时，如果对方背后没有阻挡墙或没到达棋盘边界，则只可以落在对方背后的格子内，否则才可以落在对方两侧的位置：
-![player4](https://github.com/jzllove9/Blog-jzl/assets/13548092/31eee053-263d-4557-82d8-81811c6c7e76)
+![player4](https://cdn.z.wiki/autoupload/20240910/pZFr/1400X554/player4.png)
 
 我们根据己方棋子和对方棋子所在的方位，计算出“对方棋子背后”的方格是否存在于对方棋子可行进的格子内。
 
@@ -153,7 +153,7 @@ const backY = 2 * crossB.y - this.y
 - 挡板不允许互相交叠
 ```
 
-![block1](https://github.com/jzllove9/Blog-jzl/assets/13548092/d73afe6c-24da-47bd-b141-609a77142307)
+![block1](https://cdn.z.wiki/autoupload/20240910/H5SM/1910X522/block1.png)
 
 那么在挡板管理类中就应该对这些情况进行判断，如果判断条件不通过，则不允许进行挡板的绘制。
 

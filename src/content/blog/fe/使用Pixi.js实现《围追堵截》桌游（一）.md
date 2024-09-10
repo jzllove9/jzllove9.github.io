@@ -1,11 +1,12 @@
 ---
 title: 使用Pixi.js实现《围追堵截》桌游（一）
-description: 本文将介绍《围追堵截》桌游的游戏规则，以及如何使用 Pixi.js 实现游戏的绘制。
+description: 本文将介绍《围追堵截》桌游的游戏规则，以及如何使用 Pixi.js 实现游戏的绘制，第一部分。
 date: 2024-09-10
 ---
 
 ## 前言
 > 游戏体验地址：http://www.jiajialove.com/war-of-barriers/home
+>
 > 项目地址：https://github.com/jzllove9/war-of-barriers
 
 本来只想简单画一下游戏的模块拆分。但当开始写这篇博客的时候才发现其实想用最简单的语言讲清楚还真不是一件容易的事情。比如以下这几个问题：
@@ -36,7 +37,7 @@ date: 2024-09-10
 
 2. A* 算法
 A*是一种路径规划算法，它有较好的性能和准确度。在阅读本文时可以将其理解为一个黑盒的算法：输入一个二维数组 + 起始坐标 + 终点坐标，返回一个代表着路径的坐标数组，如下所示：
-![A*](https://github.com/jzllove9/Blog-jzl/assets/13548092/71eb0b97-a5dc-4b6d-9d6e-977ee0b9b8b6)
+![A*](https://cdn.z.wiki/autoupload/20240910/gaTl/1390X486/A*.png)
 
 > 两篇介绍 A* 算法的文章：
 英文 [《Introduction to the A* Algorithm》](https://www.redblobgames.com/pathfinding/a-star/introduction.html)
@@ -88,12 +89,12 @@ const bordCol = 2 * N - 1 // 17
  - ```Rect 类的初始化``` ：使用 Graphics 绘制一个方块，逻辑比较简单不再赘述。
 
  - ```Gap 类的初始化``` ：通过观察桌游本身可知，游戏中的 Gap 有三种类型：水平，垂直，无方向，如下所示：
-![gap](https://github.com/jzllove9/Blog-jzl/assets/13548092/51e1eb2f-016f-4a32-8ba7-6c39746d8eee)
+![gap](https://cdn.z.wiki/autoupload/20240910/wM43/2344X776/gap.png)
 
 > 需要注意的是，在初始化时我们需要根据 Gap 不同的类型来进行不同的绘制操作。
 
 - ```Board 类的初始化``` ：来看整体棋盘的布局：
-![gap1](https://github.com/jzllove9/Blog-jzl/assets/13548092/245aec65-fe53-4cb4-9416-6f2d0aa9ef2b)
+![gap1](https://cdn.z.wiki/autoupload/20240910/u37A/1498X614/gap1.png)
 
  可以看到，棋盘的绘制对象分部符合以下规律：
 

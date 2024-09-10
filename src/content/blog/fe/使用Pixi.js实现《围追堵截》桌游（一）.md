@@ -1,3 +1,9 @@
+---
+title: 使用Pixi.js实现《围追堵截》桌游（一）
+description: 本文将介绍《围追堵截》桌游的游戏规则，以及如何使用 Pixi.js 实现游戏的绘制。
+date: 2024-09-10
+---
+
 ## 前言
 > 游戏体验地址：http://www.jiajialove.com/war-of-barriers/home
 > 项目地址：https://github.com/jzllove9/war-of-barriers

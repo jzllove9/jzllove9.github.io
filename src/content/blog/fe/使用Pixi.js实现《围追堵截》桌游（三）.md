@@ -11,15 +11,17 @@ date: 2024-09-10
 **从 Game 到 UI**
 game 与 UI 的通信可以通过发布 - 订阅模式来实现。在 vue 页面中创建 `game` 实例并订阅事件，在游戏进行的过程中抛出事件从而实现我们的游戏和 UI 的通信效果。由于 pixi.js 中集成了 `eventEmitter3` 这个 js 实现的发布订阅工具库，我们可以直接继承它：
 
-```
+```javascript
 // 继承 EventEmitter
 class Game extends PIXI.utils.EventEmitter {
-...
-game = new Game(app);
-game.on('player-init', gamePlayerInitHandler);
-game.on('turn-update', gameTurnUpdateHandler);
-...
-game.init();
+  init() {
+    const game = new Game(app)
+    game.on('player-init', gamePlayerInitHandler)
+    game.on('turn-update', gameTurnUpdateHandler)
+    // ...
+    game.init()
+  }
+}
 ```
 
 > 在基于缺少事件订阅工具的绘制引擎实现游戏时，可以单独引入 `eventEmitter` 并继承即可，效果与上述实现相同。
@@ -43,7 +45,7 @@ game.init();
 
 下面给 Board 上所有的 Rect 和有方向的 Gap 添加交互事件：
 
-```
+```javascript
 // Rect
 this.cursor = 'pointer';
 this.eventMode = 'static';
@@ -58,7 +60,6 @@ if (this.gapDirect !== GapDirect.none && !this.blocked) {
 
 hoverHandler(){
     this.on('click', this.clickHandler, this);
-    ...
     // 更详细的实现可以参考项目 src/game-core/entity/gap.js 中的实现
 }
 ```
@@ -67,9 +68,11 @@ hoverHandler(){
 
 可以将 board 实例初始化过程中将 board 实例传入到每个绘制对象中。当交互事件发生时我们可以通过 board 实例统一对外抛出
 
-```
+```javascript
 // board 要继承 eventemitter
-class Board extends PIXI.utils.EventEmitter {...}
+class Board extends PIXI.utils.EventEmitter {
+    // ...
+}
 
 // board 初始化
 const rect = new RectEntity(
@@ -106,7 +109,7 @@ onEventHandler(){
 
 先看 Rect 的交互具体实现：
 
-```
+```javascript
 // Rect 点击事件
 async onRectClick({ indexPos, position } /* 两个参数分别为：索引坐标和绘制对象的实际坐标 */) {
     // 在点击后关闭了棋盘上所有的可交互内容防止连续点击带来的的问题。
@@ -135,7 +138,7 @@ async onRectClick({ indexPos, position } /* 两个参数分别为：索引坐标
 
 同样，下面是 Gap 的交互实现
 
-```
+```javascript
 // Gap 点击事件
 onGapClick(gapInfo) {
     // 检查当前 gap 绘制实例是否已经被阻挡墙影响，如果是则返回
@@ -203,7 +206,7 @@ async updatePlayerInfo() {
 
 **move 方法:**
 
-```
+```javascript
 // player.js 实例中更新棋子的索引坐标，之后调用棋子绘制对象的移动方法
 async move(indexPos, position) {
     this.x = indexPos.x;
@@ -242,7 +245,7 @@ move(position) {
 玩家的下一回合方法中执行的其实就是玩家信息的更新。
 > 想象一下如果是真人在玩游戏，当玩家的回合开始时，此时玩家应该对规则范围内棋子能够行走的格子以及当前能够取胜的路径十分清楚。`nextTurn` 就是用来更新 player 的这些相关信息的方法：
 
-```
+```javascript
 // player.js
 async nextTurn() {
     await this.calcAStarPath();

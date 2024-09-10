@@ -20,7 +20,7 @@ date: 2024-09-09
 
 ### 基本使用
 
-```
+```javascript
 import ora from 'ora'
 
 // 或者使用 Promise
@@ -45,7 +45,7 @@ await oraPromise(new Promise((resolve, reject) => {
 
 TTY 原本是指 “Teletypewriter（电传打字机）”，它是一种早期的电信设备。随着时间的推移，TTY 在计算机科学中演变为一个泛指通常指代一种文本终端。文本终端是一个用户可以用来输入命令和查看输出的设备或软件环境。
 
-```
+```javascript
 - 现代意义上的 TTY 有以下几个主要特点：
 - 文本模式：TTY 只支持纯文本的输入和输出，没有图形界面。所有的交互都是通过字符和控制字符来进行的。
 - 流式输入输出：TTY 设备以流的方式处理输入和输出，这意味着数据是按顺序处理的。用户输入数据流，终端处理并输出结果。
@@ -77,7 +77,7 @@ ANSI 标准终端转义序列：https://gist.github.com/fnky/458719343aabd01cfb1
 
 ### 依赖库
 
-```
+```javascript
 // 隐藏/恢复终端输入光标
 cli-cursor: https://github.com/sindresorhus/cli-cursor
 // 提供loading集合
@@ -99,7 +99,7 @@ stdin-discarder: https://github.com/sindresorhus/stdin-discarder
 ### 导出变量
 > 一句话总结 ：各种样式的 spnnier 集合
 
-```
+```javascript
 export { default as spinners } from 'cli-spinners'
 ```
 见 https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
@@ -115,7 +115,7 @@ export { default as spinners } from 'cli-spinners'
 
 再来回顾一下 ora.js 的基本用法：
 
-```
+```javascript
 const spinner = ora('Loading unicorns').start();
 
 // or

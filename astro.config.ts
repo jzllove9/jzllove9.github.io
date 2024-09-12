@@ -3,6 +3,8 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import UnoCSS from 'unocss/astro'
 import vue from '@astrojs/vue'
+import remarkDirective from 'remark-directive'
+import { remarkAsides } from './src/remark-plugins/remark-asides.js'
 
 export default defineConfig({
   site: 'https://jzllove9.github.io',
@@ -25,5 +27,6 @@ export default defineConfig({
       },
       wrap: true,
     },
+    remarkPlugins: [remarkDirective, remarkAsides({})],
   },
 })

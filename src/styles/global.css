@@ -1,3 +1,5 @@
+@import 'remark-aside.css';
+
 html.dark .astro-code,
 html.dark .astro-code span {
   color: var(--shiki-dark) !important;
@@ -59,6 +61,7 @@ article {
 html.dark::view-transition-old(root) {
   z-index: 2147483646;
 }
+
 html.dark::view-transition-new(root) {
   z-index: 1;
 }

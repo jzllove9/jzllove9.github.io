@@ -1,4 +1,4 @@
-[jzllove9.me](https://jzllove9.github.io/)
+[jzllove9.github.io](https://jzllove9.github.io/)
 
 website about me
 

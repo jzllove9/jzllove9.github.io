@@ -6,17 +6,22 @@ date: 2024-09-09
 
 ## 介绍
 
-> ora.js 是一款优雅的，在终端使用的 spinner
 
+ora.js 是一款优雅的，在终端使用的 spinner
 项目 github 地址：https://github.com/sindresorhus/ora
+![starts](https://cdn.z.wiki/autoupload/20240912/BdLQ/1148X92/image.png?type=ha)
 
-### 作者信息
-> ora.js 作者 snidre sorhus
-> 首页: https://sindresorhus.com/apps
-> 专注于 iOS/OSX APP ， javascript 开发，开发过很多有意思的 APP 和 JS 库
+
+:::note[作者信息]
+ora.js作者 snidre sorhus
+
+首页:https://sindresorhus.com/apps
+
+专注于 iOS/OSX APP ， javascript 开发，开发过很多有意思的 APP 和 JS 库
+:::
 
 ### 使用效果
-![ora1](https://github.com/user-attachments/assets/b1fb72b0-af3f-40c9-9d60-42b2bfc7c98e)
+![ora1](https://cdn.z.wiki/autoupload/20240912/BlTd/396X272/75a8fdc7-fcfa-41c3-a989-5e6addbf515b49733.gif?type=ha)
 
 ### 基本使用
 
@@ -66,7 +71,7 @@ ANSI 标准终端转义序列：https://gist.github.com/fnky/458719343aabd01cfb1
 ## 源码解析
 
 代码结构
-![image](https://github.com/user-attachments/assets/6286a838-56ff-453c-ab11-95b9930441f4)
+![image](https://cdn.z.wiki/autoupload/20240912/1mQm/677X558/image.png)
 
 可以看到，源代码一共分为四个部分：
 
@@ -97,12 +102,14 @@ stdin-discarder: https://github.com/sindresorhus/stdin-discarder
 ```
 
 ### 导出变量
-> 一句话总结 ：各种样式的 spnnier 集合
+:::tip[一句话总结]
+其实导出的就是各种样式的 spnnier 集合
+:::
 
 ```javascript
 export { default as spinners } from 'cli-spinners'
 ```
-见 https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
+详情见： https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 
 ### 导出方法
 
@@ -129,17 +136,18 @@ const spinner = ora().start('Loading unicorns')
 ```
 
 #### 1. 构造函数
-关键点：
-![image](https://github.com/user-attachments/assets/9c05e31d-1766-43b4-b4cb-afa8b12477f8)
+:::note[关键点]
+![image](https://cdn.z.wiki/autoupload/20240912/HfOA/297X168/image.png?type=ha)
 
 Q：默认设置为什么使用 stderr 而不是 stdout？
 A：二者使用的是不同的输出流，正常情况下可能看不出区别，当重定向输出流到不同文件时就可以看出二者的区别了。
+:::
 
 #### 2. 开始方法 start()
 
-几个关键点：
-- cliCursor:
-![image](https://github.com/user-attachments/assets/ff113267-6f11-45e5-a4da-b1137f91bafe)
+:::note[关键点]
+##### cliCursor:
+![image](https://cdn.z.wiki/autoupload/20240912/2xqw/362X93/image.png?type=ha)
 
 作用：
 控制终端光标的显示&隐藏
@@ -147,35 +155,38 @@ A：二者使用的是不同的输出流，正常情况下可能看不出区别�
 原理：
 \u001B[?25h 和 \u001B[?25l 指令，这两者属于ANSI 转义序列的一部分。
 
-![image](https://github.com/user-attachments/assets/60b7c715-1de4-42fa-807d-085bdc47f1eb)
+![image](https://cdn.z.wiki/autoupload/20240912/xkQU/954X450/image.png)
 
-- stdinDiscarder
-![image](https://github.com/user-attachments/assets/457000e0-d096-4990-bc72-ec5fb40d3c3c)
+##### stdinDiscarder
+![image](https://cdn.z.wiki/autoupload/20240912/Qm3L/545X111/image.png?type=ha)
 
 作用：
 劫持输入流，丢弃所有内容，防止输入内容干扰 spinner
 
 原理：
-![image](https://github.com/user-attachments/assets/9b255a6b-e742-422b-8e25-a43cc071b558)
+![image](https://cdn.z.wiki/autoupload/20240912/jT3a/1034X1104/image.png)
 
 setRawMode 功能为上述提到的TTY的特性之一，即可以设置命令的处理模式，可选择立即处理或缓冲处理，具体表现为是否等待用户输入换行符再执行命令。
 
-需要注意的是，在 windows 终端上上述方法无效，原因是 Unix-like 系统和 Windows 系统对标准输入流 stdin 的处理方式差异较大。
+**需要注意的是，在 windows 终端上上述方法无效，原因是 Unix-like 系统和 Windows 系统对标准输入流 stdin 的处理方式差异较大。**
+:::
 
-核心逻辑：
-![image](https://github.com/user-attachments/assets/1fc583ea-9bee-4ed5-8a29-b5c011d7c18c)
+**核心逻辑：**
+![image](https://cdn.z.wiki/autoupload/20240912/gucF/592X62/image.png?type=ha)
 
 start 方法在对终端进行一些输出/输入流的基本控制后，调用 render()，并启动 setInterval 周期性调用 render()
+
 
 #### 3. 渲染方法 render()
 render方法内部只做了两件事：clear() 和 stderr.write(this.frame())，两者分别用来清理终端和向终端流写入 frame() 方法返回的内容。
 
+
 #### 4. 获取帧内容方法 frame()
-![image](https://github.com/user-attachments/assets/13abda2e-a603-470b-8fe6-73b367b6053e)
+![image](https://cdn.z.wiki/autoupload/20240912/BzRp/551X215/image.png)
 
 这个方法需要了解 this.#spinner 这个变量由什么构成，直接看源码中 #spinner 的 set 方法：
 
-![image](https://github.com/user-attachments/assets/c2f761cf-7d4f-4bbf-b61e-1775426310d4)
+![image](https://cdn.z.wiki/autoupload/20240912/wBOz/1022X523/image.png)
 
 该方法返回结构为 { frames: xxxx } 的对象，特别需要注意的是，在不支持 unicode 的终端中会使用 line 作为ora.js 的默认 spinner 而不是 dot，这是因为 dot 的内容由 unicode 码构成，而 line 由 -  \\  |  /   构成，保证 spinner 效果的同时保障其兼容性。
 
@@ -186,8 +197,20 @@ start 方法的逆操作，包括停止周期运行函数，重置帧索引，�
 通过阅读源码可知 ora.js 几乎将所有可设置的选项都通过 set 函数进行监听，这样做的好处是所有的属性变量是响应式的，可以在运行过程中实时更改而无需使用者来关心变化过程。
 举个 🌰：
 
-![image](https://github.com/user-attachments/assets/f6157cdb-b0f6-4384-a997-b57811b038ae)
+![image](https://cdn.z.wiki/autoupload/20240912/xYyv/293X522/image.png?type=ha)
 
-![image](https://github.com/user-attachments/assets/58fbf35f-0107-4aa6-b3a4-8c5221043d3c)
+![image](https://cdn.z.wiki/autoupload/20240912/CMot/1003X263/image.png)
 
 几乎所有对于文本的修改都需要经过这个 updateLineCount 方法，该方法作用是计算将所有字符拼接（包括缩进，前缀，文本，后缀）后命令行展示在终端中所占的行数，方便后续 clear 函数对其进行清理。
+
+:::note[总结]
+1. ora.js 的基本使用、API了解以及其实现原理。
+2. 使用 ANSI 实现对终端的操作，一些比较有名的终端应用（例如 vim）或者工具库（例如 chalk.js）的实现也大多数使用了这些原理。
+3. 除 Vue，React 外，对响应式思想的简单应用。
+4. 一个广受欢迎的开源库并不一定都由极其复杂的逻辑构成，但它一定是高效且精准的解决了某些痛点才得以流行。
+:::
+
+能用这些知识做什么？
+ora.js 本身可以应用在任何需要等待长任务执行的终端环境下。从应用角度来说在开发 cli工具或其他 node 脚本时很有用（同时它还存在 Python，Rust，Go，Deno 等各种版本）。
+响应式思想的实践，这种收集变化并在某个刷新函数（render）中统一进行处理的方式可以让代码逻辑变得清晰和集中，在后续开发中可以考虑应用这种思维。
+通过了解 ANSI 标准，可以横向联想到例如 chalk.js 终端染色、inquirer.js  用户输入 等工具库逻辑的底层实现都依靠这套标准。为以后了解同类型甚至创造同样功能的工具库打下基础。

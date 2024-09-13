@@ -21,7 +21,7 @@ ora.js作者 snidre sorhus
 :::
 
 ### 使用效果
-![ora1](https://cdn.z.wiki/autoupload/20240912/BlTd/396X272/75a8fdc7-fcfa-41c3-a989-5e6addbf515b49733.gif?type=ha)
+![ora1](https://s2.loli.net/2024/09/13/ZIjcmhJRLXnQD5z.gif)
 
 ### 基本使用
 

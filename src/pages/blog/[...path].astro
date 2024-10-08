@@ -26,12 +26,12 @@ function activeLink(pathname: string) {
 ---
 
 <BaseLayout title="博客" description="博客列表" pageNav={true} pageOperate={true}>
-  <div class="flex flex-col gap-2 sm:flex-row sm:gap-4 flex-wrap mb-8">
+  <div class="flex flex-col flex-items-end gap-2 sm:flex-row sm:gap-4 flex-wrap mb-8">
     {
-      siteConfig.page.blogLinks.map((nav) => (
+      siteConfig.page.blogLinks.map((nav, index) => (
         <a
           aria-label={nav.text}
-          class={`nav-link text-3xl font-bold ${activeLink(nav.href) ? 'opacity-80' : 'opacity-30 hover:opacity-50'}`}
+          class={`nav-link text-${index === 0 ? '3xl' : '2xl'} font-bold ${activeLink(nav.href) ? 'opacity-80' : 'opacity-30 hover:opacity-50'}`}
           href={nav.href}
         >
           {nav.text}

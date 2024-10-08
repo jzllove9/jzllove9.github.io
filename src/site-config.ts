@@ -42,6 +42,10 @@ export const siteConfig = {
         text: '前端',
         href: '/blog/fe',
       },
+      // {
+      //   text: '随笔',
+      //   href: '/blog/diary',
+      // },
     ],
   },
   footer: {

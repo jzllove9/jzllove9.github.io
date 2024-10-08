@@ -1,25 +1,9 @@
 ---
-title: Welcome
-description: 第一篇博客
+title: 欢迎 Welcome
+description: 你好，世界！
 date: 2024-09-09
 ---
 
 ### 欢迎
 
-欢迎来到我的博客，这里将分享一些我学习的心得体会，以及一些生活中的感悟。
-
-:::tip[Customized Title]
-hello world
-:::
-
-:::danger[Customized Title]
-hello world
-:::
-
-:::note[Customized Title]
-hello world
-:::
-
-:::warning[Customized Title]
-hello world
-:::
+欢迎来到我的博客，这里将分享一些我学习的心得体会，以及一些生活中的感悟，希望我的分享能够对您有所帮助。

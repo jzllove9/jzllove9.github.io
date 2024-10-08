@@ -16,10 +16,10 @@ import { getLinkTarget } from '@/utils/link'
         <span v-if="index < siteConfig.footer.navLinks.length - 1" op-70> / </span>
       </template>
     </div>
-    <!-- <div flex>
+    <div flex>
       <a nav-link href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
       <span op-70>&nbsp;&nbsp;&copy;&nbsp;&nbsp;{{ new Date().getFullYear() }}&nbsp;&nbsp;{{ siteConfig.author
       }}.</span>
-    </div> -->
+    </div>
   </footer>
 </template>

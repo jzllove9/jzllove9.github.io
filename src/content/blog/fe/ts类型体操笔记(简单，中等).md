@@ -71,7 +71,7 @@ type ObjectToUnion<T> = T[keyof T]
 ```
 ---
 
-- 斐波那契类型解题思路：
+- 4192 题 Fibonacci 斐波那契类型解题思路：
   - 使用 N1 N2 两个数组的**长度**代表当前参与计算的两个数
   - 使用 No 数组来标记当前的计算位置，No 数组长度的增加意味着计算向右移动接近目标值
   - 计算的第一位和第二位需要特殊处理，两者是基础值都为1
@@ -97,3 +97,59 @@ type Fibonacci<
 ```
 ---
 
+---
+
+- 4471 题 Zip
+
+- 第一种解法：
+```typescript
+type Zip<A extends any[], B extends any[], L extends any[] = []> = L['length'] extends A['length'] | B['length']
+  ? L
+  : Zip<A, B, [...L, [A[L['length']], B[L['length']]]]>
+```
+
+- 第二种解法：
+```typescript
+type Zip<T, U, N extends any[] = []> = T extends [infer TF, ...infer TR] ? U extends [infer UF, ...infer UR] ? [[TF, UF], ...Zip<TR, UR>] : N : N
+```
+
+第一种解法很巧妙，利用 L 数组的长度来标记当前对 A 和 B 的递归位置，当 L 长度等于 A 或 B 长度时，停止遍历，返回 L 数组。随着递归的进行，每次成功的递归都会使得 L 数组的长度增加 1，而这个 +1 后的 L['length'] 恰好可以用在下一次递归时作为索引来获取 A 和 B 的对应元素。
+
+第二种解法是利用递归的思想，先判断 T 和 U 是否可以被拆分成第一个元素和其他剩余部分，如果 T 和 U 都可以，则将两个取出的第一个元素组成新的元组，并递归处理剩余部分 N；如果 T 或 U 不能被拆分，则直接返回上次递归传入的当前的 N 数组
+
+---
+- 如何区分一个确切的 数字类型 还是 number 类型
+
+  - 确切的数字扩展自 number
+  - number 扩展自它自己 number
+  - number 不能扩展自确切的数字
+
+Exact number extends number ? true : false // true
+number extends number ? true : false // true
+number extends Exact number ? true : false // false
+
+---
+
+- 没能理解的 trimRight
+- 
+:::tips[TODO]
+why？
+:::
+
+```typescript
+type TrimRight<S extends string> = S extends `${infer Left}${infer Right}` ? Right extends ' ' | '\n' | '\t' ? TrimRight<Left> : S : S;
+```
+上面的答案是错误的，应该是下面这样的：
+
+```typescript
+type TrimRight<S extends string> = S extends `${infer Left}${' ' | '\n' | '\t'}` ? TrimRight<Left> : S;
+```
+目前没能理解为什么会这样
+
+----
+
+- 判断两个类型是否相等的一些情况：
+  - 对于文字类型 A B，当且仅当 A extends B 时，A 才等于 B
+  - 两个无参数函数类型相等当且仅当它们的返回值类型相等
+  - 对于分别返回字面量类型 L1 和 L2 的无参数函数 F1 F2，当且仅当 L1 extends L2 时，F1 才等于 F2
+  - 当所有可以赋值给 X1 的类型 E1 的集合与所有可以赋值给 X2 的类型 E2 的集合相同时，两个类型 X1 和 X2 相等

@@ -37,9 +37,9 @@ type D = B extends A ? true : false // true
 在 ts 的 checker.ts 源码中，有如下一段注释：
 
 :::note[源码注释]
-// Two conditional types 'T1 extends U1 ? X1 : Y1' and 'T2 extends U2 ? X2 : Y2' are related if
-// one of T1 and T2 is related to the other, U1 and U2 are identical types, X1 is related to X2,
-// and Y1 is related to Y2. 
+ Two conditional types 'T1 extends U1 ? X1 : Y1' and 'T2 extends U2 ? X2 : Y2' are related if
+ one of T1 and T2 is related to the other, U1 and U2 are identical types, X1 is related to X2,
+ and Y1 is related to Y2. 
 :::  
 
 也就是说，如果想满足两个条件类型 T1 extends U1 ? X1 : Y1 和 T2 extends U2 ? X2 : Y2 具备可分配性，需要满足以下条件：

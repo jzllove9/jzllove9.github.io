@@ -51,7 +51,7 @@ export const siteConfig = {
   footer: {
     navLinks: [
       {
-        text: 'GitHub Repository',
+        text: '我的 GitHub',
         href: 'https://github.com/jzllove9/jzllove9.github.io',
       },
     ],
